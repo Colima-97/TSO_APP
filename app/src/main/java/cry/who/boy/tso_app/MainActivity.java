@@ -12,9 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckedTextView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+
+    implements NavigationView.OnNavigationItemSelectedListener {
+    CheckedTextView CTV_Recordar_Usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +26,15 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        CTV_Recordar_Usuario=(CheckedTextView) findViewById(R.id.CTV_Recordar_Usuario);
+        CTV_Recordar_Usuario.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+                if(CTV_Recordar_Usuario.isChecked()){
+                    CTV_Recordar_Usuario.setChecked(false);
+                }else{
+                    CTV_Recordar_Usuario.setChecked(true);
+                }
             }
         });
 
