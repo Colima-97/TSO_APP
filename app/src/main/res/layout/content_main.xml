@@ -88,6 +88,7 @@
         android:textColor="#1a1946"/>
 
     <Button
+        android:id="@+id/BTN_Iniciar_Sesion"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -97,7 +98,9 @@
         android:gravity="center"
         android:text="Iniciar Sesión"
         android:textColor="#1a1946"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:background="@drawable/bk_boton_plano"
+        android:stateListAnimator="@null"/>
 
 
 </RelativeLayout>
