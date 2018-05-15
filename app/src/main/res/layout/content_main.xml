@@ -10,7 +10,8 @@
     android:scrollbars="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main"
+    android:id="@+id/LL_Layout1">
 
     <TextView
         android:id="@+id/TV_Users"
@@ -82,7 +83,7 @@
         android:id="@+id/CTV_Recordar_Usuario"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
         android:checkMark="?android:attr/listChoiceIndicatorMultiple"
         android:checked="true"
         android:gravity="start"
@@ -92,17 +93,37 @@
         android:textSize="15sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/BTN_Iniciar_Sesion"
-        android:layout_width="150dp"
+    <RelativeLayout
+        android:id="@+id/RL_Layout1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="75dp"
-        android:background="@drawable/bk_boton_plano"
-        android:stateListAnimator="@null"
-        android:text="Iniciar Sesión"
-        android:textAlignment="center"
-        android:textColor="#1a1946"
-        android:textSize="15sp" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_weight="0">
 
+        <Button
+            android:id="@+id/BTN_Iniciar_Sesion"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bk_boton_plano"
+            android:stateListAnimator="@null"
+            android:text="Iniciar Sesión"
+            android:textAlignment="center"
+            android:textColor="#1a1946"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/BTN_Registrar"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bk_boton_plano"
+            android:stateListAnimator="@null"
+            android:text="Registrar"
+            android:textAlignment="center"
+            android:textColor="#1a1946"
+            android:textSize="15sp" />
+    </RelativeLayout>
 </LinearLayout>
