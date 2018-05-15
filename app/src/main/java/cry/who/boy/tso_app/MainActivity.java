@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
     CheckedTextView CTV_Recordar_Usuario;
     TextInputEditText txtPassword,txtConfirm;
-    Button btnLogin;
+    Button btnLogin,btnRegister;
     FirebaseDatabase database;
     DatabaseReference myRef;
 
