@@ -1,10 +1,9 @@
 package cry.who.boy.tso_app;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,12 +17,22 @@ import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import cry.who.boy.tso_app.Objetos.FirebaseReferences;
+
 public class MainActivity extends AppCompatActivity
 
     implements NavigationView.OnNavigationItemSelectedListener {
     CheckedTextView CTV_Recordar_Usuario;
     TextInputEditText txtPassword,txtConfirm;
     Button btnLogin;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +41,20 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference(FirebaseReferences.Referencias);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int valor = dataSnapshot.getValue(Integer.class);
+                Log.i("Datos",valor+"");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("ERROR", databaseError.getMessage());
+            }
+        });
         txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password);
         txtConfirm = (TextInputEditText) findViewById(R.id.ET_id_Confirm_Password);
         btnLogin = (Button) findViewById(R.id.BTN_Iniciar_Sesion);
