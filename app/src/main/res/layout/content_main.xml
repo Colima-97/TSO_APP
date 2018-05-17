@@ -106,6 +106,7 @@
             android:id="@+id/BTN_Iniciar_Sesion"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bk_boton_plano"
             android:stateListAnimator="@null"
             android:text="Iniciar Sesión"
@@ -119,6 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bk_boton_plano"
             android:stateListAnimator="@null"
             android:text="Registrar"
@@ -126,4 +128,5 @@
             android:textColor="#1a1946"
             android:textSize="15sp" />
     </RelativeLayout>
+
 </LinearLayout>
