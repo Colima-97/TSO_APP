@@ -10,6 +10,18 @@
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Fragment_Registrar-->
+    <string name="New_User">Nuevo Usuario</string>
+
+    <!--Content_main & Fragment_Registrar-->
+    <string name="Password">Contraseña</string>
+    <string name="Confirm_Password">Confirmar Contraseña</string>
+    <string name="Sesion">No cerrar sesión</string>
+    <string name="Login_BTN">Iniciar Sesión</string>
+
+    <!--Content_main-->
+    <string name="Select_User">Seleccionar Usuario</string>
+    <string name="Register">Registrar</string>
 
 </resources>

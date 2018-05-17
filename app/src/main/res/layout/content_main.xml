@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Seleccione Usuario"
+        android:text="@string/Select_User"
         android:textColor="#1a1946"
         android:textSize="15sp" />
 
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:text="Contraseña"
+        android:text="@string/Password"
         android:textColor="#1a1946"
         android:textSize="15sp" />
 
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
-            android:hint="Contraseña"
+            android:hint="@string/Password"
             android:inputType="textPassword"
             android:maxLines="1" />
 
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
-        android:text="Confirmar Contraseña"
+        android:text="@string/Confirm_Password"
         android:textColor="#1a1946"
         android:textSize="15sp" />
 
@@ -73,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:hint="Contraseña"
+            android:hint="@string/Confirm_Password"
             android:inputType="textPassword"
             android:maxLines="1" />
 
@@ -88,7 +88,7 @@
         android:checked="true"
         android:gravity="start"
         android:shadowRadius="0"
-        android:text="No cerrar sesión"
+        android:text="@string/Sesion"
         android:textColor="#1a1946"
         android:textSize="15sp"
         android:textStyle="bold" />
@@ -109,7 +109,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/bk_boton_plano"
             android:stateListAnimator="@null"
-            android:text="Iniciar Sesión"
+            android:text="@string/Login_BTN"
             android:textAlignment="center"
             android:textColor="#1a1946"
             android:textSize="15sp" />
@@ -123,7 +123,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/bk_boton_plano"
             android:stateListAnimator="@null"
-            android:text="Registrar"
+            android:text="@string/Register"
             android:textAlignment="center"
             android:textColor="#1a1946"
             android:textSize="15sp" />
