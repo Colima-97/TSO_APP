@@ -2,6 +2,7 @@ package cry.who.boy.tso_app;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Bases de Datos
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference(FirebaseReferences.Referencias);
         myRef.addValueEventListener(new ValueEventListener() {
@@ -55,15 +57,13 @@ public class MainActivity extends AppCompatActivity
                 Log.e("ERROR", databaseError.getMessage());
             }
         });
+        //Botones, TextView, etc.
         txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password);
+        btnRegister = (Button) findViewById(R.id.BTN_Registrar);
+        btnRegister.setOnClickListener((View.OnClickListener) this);
         btnLogin = (Button) findViewById(R.id.BTN_Iniciar_Sesion);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
-
+        btnLogin.setOnClickListener((View.OnClickListener) this);
+        //CheckTextView
         CTV_Recordar_Usuario=(CheckedTextView) findViewById(R.id.CTV_Recordar_Usuario);
         CTV_Recordar_Usuario.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +86,22 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    public void login(){
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.BTN_Iniciar_Sesion:
+                Login();
+                break;
+
+            case R.id.BTN_Registrar:
+                Registrar_Fragment fragment1 = new Registrar_Fragment();
+                FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
+                transition.replace(R.id.FL_Contenido,fragment1);
+                transition.commit();
+                break;
+        }
+    }
+
+    public void Login(){
         if(TextUtils.isEmpty(txtPassword.getText().toString().trim())){
             txtPassword.setError("No puede estar vacía");
         }else {
@@ -94,6 +109,7 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
