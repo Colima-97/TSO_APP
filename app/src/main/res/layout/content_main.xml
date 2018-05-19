@@ -54,31 +54,6 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <TextView
-        android:id="@+id/TV_Confirm_Password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:text="@string/Confirm_Password"
-        android:textColor="#1a1946"
-        android:textSize="15sp" />
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/ET_id_Confirm_Password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:hint="@string/Confirm_Password"
-            android:inputType="textPassword"
-            android:maxLines="1" />
-
-    </android.support.design.widget.TextInputLayout>
-
     <CheckedTextView
         android:id="@+id/CTV_Recordar_Usuario"
         android:layout_width="150dp"
@@ -86,47 +61,57 @@
         android:layout_marginTop="5dp"
         android:checkMark="?android:attr/listChoiceIndicatorMultiple"
         android:checked="true"
-        android:gravity="start"
         android:shadowRadius="0"
         android:text="@string/Sesion"
         android:textColor="#1a1946"
         android:textSize="15sp"
         android:textStyle="bold" />
 
-    <RelativeLayout
-        android:id="@+id/RL_Layout1"
+    <LinearLayout
+        android:id="@+id/LL_Layout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_weight="0">
+        android:layout_height="match_parent"
+        android:elevation="0dp"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="30dp"
+        android:gravity="bottom">
 
-        <Button
-            android:id="@+id/BTN_Iniciar_Sesion"
-            android:layout_width="150dp"
+        <RelativeLayout
+            android:id="@+id/RL_Layout1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bk_boton_plano"
-            android:stateListAnimator="@null"
-            android:text="@string/Login_BTN"
-            android:textAlignment="center"
-            android:textColor="#1a1946"
-            android:textSize="15sp" />
+            android:layout_gravity="bottom"
+            android:layout_weight="0">
 
-        <Button
-            android:id="@+id/BTN_Registrar"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bk_boton_plano"
-            android:stateListAnimator="@null"
-            android:text="@string/Register"
-            android:textAlignment="center"
-            android:textColor="#1a1946"
-            android:textSize="15sp" />
-    </RelativeLayout>
+            <Button
+                android:id="@+id/BTN_Iniciar_Sesion"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bk_boton_plano"
+                android:stateListAnimator="@null"
+                android:text="@string/Login_BTN"
+                android:textAlignment="center"
+                android:textColor="#1a1946"
+                android:textSize="15sp" />
 
+            <Button
+                android:id="@+id/BTN_Registrar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bk_boton_plano"
+                android:stateListAnimator="@null"
+                android:text="@string/Register"
+                android:textAlignment="center"
+                android:textColor="#1a1946"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
 </LinearLayout>

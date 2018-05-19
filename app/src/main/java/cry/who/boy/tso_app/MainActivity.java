@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
 
     implements NavigationView.OnNavigationItemSelectedListener {
     CheckedTextView CTV_Recordar_Usuario;
-    TextInputEditText txtPassword,txtConfirm;
+    TextInputEditText txtPassword;
     Button btnLogin,btnRegister;
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
         txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password);
-        txtConfirm = (TextInputEditText) findViewById(R.id.ET_id_Confirm_Password);
         btnLogin = (Button) findViewById(R.id.BTN_Iniciar_Sesion);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,15 +87,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void login(){
-        String Pass,Conf;
-        if(TextUtils.isEmpty(Pass = txtPassword.getText().toString().trim()) ||
-                TextUtils.isEmpty(Conf = txtConfirm.getText().toString().trim())){
+        if(TextUtils.isEmpty(txtPassword.getText().toString().trim())){
             txtPassword.setError("No puede estar vacía");
-            txtConfirm.setError("No puede estar vacía");
-        }else if(Pass.equals(Conf) == false) {
-                txtPassword.setError("No son iguales");
-                txtConfirm.setError("No son iguales");
-            }else{
+        }else {
             Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_SHORT).show();
         }
 
