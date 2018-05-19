@@ -26,8 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import cry.who.boy.tso_app.Objetos.FirebaseReferences;
 
 public class MainActivity extends AppCompatActivity
-
     implements NavigationView.OnNavigationItemSelectedListener {
+
     CheckedTextView CTV_Recordar_Usuario;
     TextInputEditText txtPassword;
     Button btnLogin,btnRegister;
@@ -57,12 +57,9 @@ public class MainActivity extends AppCompatActivity
         });
         txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password);
         btnLogin = (Button) findViewById(R.id.BTN_Iniciar_Sesion);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
+        btnLogin.setOnClickListener((View.OnClickListener) this);
+        btnRegister = (Button) findViewById(R.id.BTN_Registrar);
+        btnRegister.setOnClickListener((View.OnClickListener) this);
 
         CTV_Recordar_Usuario=(CheckedTextView) findViewById(R.id.CTV_Recordar_Usuario);
         CTV_Recordar_Usuario.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +83,17 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    public void login(){
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.BTN_Iniciar_Sesion:
+                break;
+
+            case R.id.BTN_Registrar:
+                break;
+        }
+    }
+
+    public void Login(){
         if(TextUtils.isEmpty(txtPassword.getText().toString().trim())){
             txtPassword.setError("No puede estar vacía");
         }else {
@@ -94,6 +101,7 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
