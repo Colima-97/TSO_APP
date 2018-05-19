@@ -1,5 +1,6 @@
 package cry.who.boy.tso_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.text.TextUtils;
@@ -86,9 +87,12 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View v){
         switch (v.getId()){
             case R.id.BTN_Iniciar_Sesion:
+                Login();
                 break;
 
             case R.id.BTN_Registrar:
+                Intent intento = new Intent(this,Registrar_Usuario.class);
+                startActivity(intento);
                 break;
         }
     }
