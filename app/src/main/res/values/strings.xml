@@ -1,6 +1,7 @@
 <resources>
     <!--Nombre de la aplicación-->
     <string name="app_name">Smart_Home</string>
+    <string name="activity_name">Nuevo Usuario</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -22,5 +23,8 @@
     <!--Content_main-->
     <string name="Select_User">Seleccionar Usuario</string>
     <string name="Register">Registrar</string>
+
+    <!--Navigation View-->
+    <string name="Users">Iniciar Sesión</string>
 
 </resources>
