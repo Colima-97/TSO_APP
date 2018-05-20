@@ -27,13 +27,11 @@ import com.google.firebase.database.ValueEventListener;
 import cry.who.boy.tso_app.Objetos.FirebaseReferences;
 
 public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+    implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    CheckedTextView CTV_Recordar_Usuario;
-    TextInputEditText txtPassword;
-    Button btnLogin,btnRegister;
-    FirebaseDatabase database;
-    DatabaseReference myRef;
+private CheckedTextView checkedTextView;
+private Button btnLogin, btnRegister;
+private TextInputEditText txtPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,38 +39,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference(FirebaseReferences.Referencias);
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int valor = dataSnapshot.getValue(Integer.class);
-                Log.i("Datos",valor+"");
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("ERROR", databaseError.getMessage());
-            }
-        });
-        txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password);
-        btnLogin = (Button) findViewById(R.id.BTN_Iniciar_Sesion);
-        btnLogin.setOnClickListener((View.OnClickListener) this);
-        btnRegister = (Button) findViewById(R.id.BTN_Registrar);
-        btnRegister.setOnClickListener((View.OnClickListener) this);
-
-        CTV_Recordar_Usuario=(CheckedTextView) findViewById(R.id.CTV_Recordar_Usuario);
-        CTV_Recordar_Usuario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(CTV_Recordar_Usuario.isChecked()){
-                    CTV_Recordar_Usuario.setChecked(false);
-                }else{
-                    CTV_Recordar_Usuario.setChecked(true);
-                }
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -82,17 +48,35 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        checkedTextView = (CheckedTextView) findViewById(R.id.CTV_Recordar_Usuario);
+        checkedTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkedTextView.toggle();
+            }
+        });
+
+        btnLogin = (Button) findViewById(R.id.BTN_Iniciar_Sesion);
+        btnLogin.setOnClickListener(this);
+        btnRegister = (Button) findViewById(R.id.BTN_Registrar);
+        btnRegister.setOnClickListener(this);
+
+        txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password);
     }
 
-    public void onClick(View v){
-        switch (v.getId()){
+    public void onClick(View view){
+        switch (view.getId()){
             case R.id.BTN_Iniciar_Sesion:
                 Login();
+                if(checkedTextView.isChecked()){
+                    Toast.makeText(this,"Recordar Usuario",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this,"No Recordar Usuario",Toast.LENGTH_SHORT).show();
+                }
                 break;
-
             case R.id.BTN_Registrar:
-                Intent intento = new Intent(this,Registrar_Usuario.class);
-                startActivity(intento);
+                Toast.makeText(this,"Registrar",Toast.LENGTH_SHORT).show();
                 break;
         }
     }
