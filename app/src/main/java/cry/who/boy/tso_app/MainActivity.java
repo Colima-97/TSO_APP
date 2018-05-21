@@ -76,7 +76,8 @@ private TextInputEditText txtPassword;
                 }
                 break;
             case R.id.BTN_Registrar:
-                Toast.makeText(this,"Registrar",Toast.LENGTH_SHORT).show();
+                Intent intento = new Intent(MainActivity.this,Registrar_Usuario.class);
+                startActivity(intento);
                 break;
         }
     }
