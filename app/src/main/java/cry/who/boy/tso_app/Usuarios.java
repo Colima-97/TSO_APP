@@ -14,13 +14,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckedTextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class Usuarios extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private CheckedTextView checkedTextView;
-    private TextInputEditText txtPassword;
+    private TextInputEditText txtPassword, txtPassConfirm;
+    private EditText user;
     private Button btnLogin;
 
     @Override
@@ -49,18 +51,42 @@ public class Usuarios extends AppCompatActivity
 
         btnLogin = (Button) findViewById(R.id.BTN_Iniciar_Sesion_NA);
         btnLogin.setOnClickListener(this);
+
+        txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Confirm_Password_NA);
+        txtPassConfirm = (TextInputEditText) findViewById(R.id.ET_id_Confirm_Password_NA);
+
+        user = (EditText) findViewById(R.id.ET_Usuario_NA);
     }
 
     @Override
     public void onClick(View v) {
-
+        Login(user.getText().toString().trim(),txtPassword.getText().toString(),txtPassConfirm.getText().toString());
     }
 
     public void Login(String User, String Password, String Conf_Pass){
-        if(TextUtils.isEmpty(txtPassword.getText().toString().trim())){
-            txtPassword.setError("No puede estar vacía");
-        }else {
-            Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_SHORT).show();
+        String a,b;
+
+        if(TextUtils.isEmpty(a = txtPassword.getText().toString().trim()) ||
+                TextUtils.isEmpty(b = txtPassConfirm.getText().toString().trim()) ||
+                    TextUtils.isEmpty(user.getText().toString().trim())){
+            txtPassword.setError("No pueden estar vacía");
+            txtPassConfirm.setError("No pueden estar vacías");
+            user.setError("No puede estar vacía");
+        }else if(a.equals(b) != true) {
+            txtPassword.setError("Deben ser iguales");
+            txtPassConfirm.setError("Deben ser iguales");
+            }else{
+            if(checkedTextView.isChecked()){
+                Toast.makeText(this,"Registro Exitoso",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Recordar Usuario",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"User: "+User,Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Password: "+Password,Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this,"Registro Exitoso",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"No Recordar Usuario",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"User: "+User,Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Password: "+Password,Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
