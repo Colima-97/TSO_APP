@@ -76,7 +76,7 @@ private TextInputEditText txtPassword;
                 }
                 break;
             case R.id.BTN_Registrar:
-                Intent intento = new Intent(MainActivity.this,Registrar_Usuario.class);
+                Intent intento = new Intent(MainActivity.this, Usuarios.class);
                 startActivity(intento);
                 break;
         }
