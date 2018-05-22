@@ -19,8 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Registrar_Usuario"></activity>
+        <activity android:name=".Registrar_Usuario" />
+        <activity
+            android:name=".Usuarios"
+            android:label="@string/title_activity_usuarios"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
