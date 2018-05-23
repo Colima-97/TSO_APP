@@ -19,7 +19,7 @@
         android:contentDescription="@string/app_name"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/smart_home_icon" />
+        app:srcCompat="@drawable/smart_home_icon"/>
 
     <TextView
         android:layout_width="match_parent"
