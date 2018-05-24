@@ -1,42 +1,36 @@
 package cry.who.boy.tso_app;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckedTextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.auth.FirebaseAuth;
 
-import cry.who.boy.tso_app.Objetos.FirebaseReferences;
+public class Usuarios extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-
-private CheckedTextView checkedTextView;
-private Button btnLogin, btnRegister;
-private TextInputEditText txtPassword;
+    private CheckedTextView checkedTextView;
+    private TextInputEditText txtPassword, txtPassConfirm;
+    private EditText user;
+    private Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_usuarios);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -49,7 +43,7 @@ private TextInputEditText txtPassword;
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        checkedTextView = (CheckedTextView) findViewById(R.id.CTV_Recordar_Usuario);
+        checkedTextView = (CheckedTextView) findViewById(R.id.CTV_Recordar_Usuario_NA);
         checkedTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,38 +51,47 @@ private TextInputEditText txtPassword;
             }
         });
 
-        btnLogin = (Button) findViewById(R.id.BTN_Iniciar_Sesion);
+        btnLogin = (Button) findViewById(R.id.BTN_Iniciar_Sesion_NA);
         btnLogin.setOnClickListener(this);
-        btnRegister = (Button) findViewById(R.id.BTN_Registrar);
-        btnRegister.setOnClickListener(this);
 
-        txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password);
+        txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Confirm_Password_NA);
+        txtPassConfirm = (TextInputEditText) findViewById(R.id.ET_id_Confirm_Password_NA);
+
+        user = (EditText) findViewById(R.id.ET_Usuario_NA);
     }
 
-    public void onClick(View view){
-        switch (view.getId()){
-            case R.id.BTN_Iniciar_Sesion:
-                Login();
-                if(checkedTextView.isChecked()){
-                    Toast.makeText(this,"Recordar Usuario",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(this,"No Recordar Usuario",Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.BTN_Registrar:
-                Intent intento = new Intent(MainActivity.this, Usuarios.class);
-                startActivity(intento);
-                break;
-        }
+    @Override
+    public void onClick(View v) {
+        Login(user.getText().toString().trim(),txtPassword.getText().toString(),txtPassConfirm.getText().toString());
     }
 
-    public void Login(){
-        if(TextUtils.isEmpty(txtPassword.getText().toString().trim())){
-            txtPassword.setError("No puede estar vacía");
-        }else {
-            Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_SHORT).show();
-        }
+    public void Login(String User, String Password, String Conf_Pass){
+        String a,b;
 
+        if(TextUtils.isEmpty(a = txtPassword.getText().toString().trim()) ||
+                TextUtils.isEmpty(b = txtPassConfirm.getText().toString().trim()) ||
+                    TextUtils.isEmpty(user.getText().toString().trim())){
+            txtPassword.setError("No pueden estar vacía");
+            txtPassConfirm.setError("No pueden estar vacías");
+            user.setError("No puede estar vacía");
+        }else if(a.equals(b) != true) {
+            txtPassword.setError("Deben ser iguales");
+            txtPassConfirm.setError("Deben ser iguales");
+            }else{
+            if(checkedTextView.isChecked()){
+                Toast.makeText(this,"Registro Exitoso",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Recordar Usuario",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"User: "+User,Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Password: "+Password,Toast.LENGTH_SHORT).show();
+
+            }else{
+                Toast.makeText(this,"Registro Exitoso",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"No Recordar Usuario",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"User: "+User,Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Password: "+Password,Toast.LENGTH_SHORT).show();
+                
+            }
+        }
     }
 
     @Override
@@ -104,7 +107,7 @@ private TextInputEditText txtPassword;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.usuarios, menu);
         return true;
     }
 
@@ -132,7 +135,7 @@ private TextInputEditText txtPassword;
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            //lol
+
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -147,4 +150,5 @@ private TextInputEditText txtPassword;
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

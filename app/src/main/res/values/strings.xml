@@ -1,12 +1,31 @@
 <resources>
     <!--Nombre de la aplicación-->
     <string name="app_name">Smart_Home</string>
-
+    <string name="activity_name">Nuevo Usuario</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <!--Fragment_Registrar-->
+    <string name="New_User">Nuevo Usuario</string>
+
+    <!--Content_main & Fragment_Registrar-->
+    <string name="Password">Contraseña</string>
+    <string name="Confirm_Password">Confirmar Contraseña</string>
+    <string name="Sesion">No cerrar sesión</string>
+    <string name="Login_BTN">Iniciar Sesión</string>
+
+    <!--Content_main-->
+    <string name="Select_User">Seleccionar Usuario</string>
+    <string name="Register">Registrar</string>
+
+    <!--Navigation View-->
+    <string name="Users">Iniciar Sesión</string>
+    <string name="title_activity_usuarios">Usuarios</string>
 
 </resources>
