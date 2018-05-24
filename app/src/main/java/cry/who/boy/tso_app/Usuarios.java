@@ -89,7 +89,7 @@ public class Usuarios extends AppCompatActivity
                 Toast.makeText(this,"No Recordar Usuario",Toast.LENGTH_SHORT).show();
                 Toast.makeText(this,"User: "+User,Toast.LENGTH_SHORT).show();
                 Toast.makeText(this,"Password: "+Password,Toast.LENGTH_SHORT).show();
-                
+
             }
         }
     }
