@@ -17,6 +17,8 @@ import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Usuarios extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
@@ -81,11 +83,13 @@ public class Usuarios extends AppCompatActivity
                 Toast.makeText(this,"Recordar Usuario",Toast.LENGTH_SHORT).show();
                 Toast.makeText(this,"User: "+User,Toast.LENGTH_SHORT).show();
                 Toast.makeText(this,"Password: "+Password,Toast.LENGTH_SHORT).show();
+
             }else{
                 Toast.makeText(this,"Registro Exitoso",Toast.LENGTH_SHORT).show();
                 Toast.makeText(this,"No Recordar Usuario",Toast.LENGTH_SHORT).show();
                 Toast.makeText(this,"User: "+User,Toast.LENGTH_SHORT).show();
                 Toast.makeText(this,"Password: "+Password,Toast.LENGTH_SHORT).show();
+                
             }
         }
     }

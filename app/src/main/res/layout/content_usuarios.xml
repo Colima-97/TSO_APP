@@ -13,100 +13,112 @@
     android:paddingRight="16dp"
     android:paddingBottom="10dp">
 
-    <TextView
-        android:id="@+id/TV_Users_NA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/New_User"
-        android:textColor="#1a1946"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/ET_Usuario_NA"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/TV_Password_NA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="@string/Password"
-        android:textColor="#1a1946"
-        android:textSize="15sp" />
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/ET_id_Password_NA"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:hint="@string/Password"
-            android:inputType="textPassword"
-            android:maxLines="1" />
+            android:orientation="vertical">
 
-    </android.support.design.widget.TextInputLayout>
+            <TextView
+                android:id="@+id/TV_Users_NA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/New_User"
+                android:textColor="#1a1946"
+                android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/TV_Confirm_Password_NA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:text="@string/Confirm_Password"
-        android:textColor="#1a1946"
-        android:textSize="15sp" />
+            <EditText
+                android:id="@+id/ET_Usuario_NA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true">
+            <TextView
+                android:id="@+id/TV_Password_NA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:text="@string/Password"
+                android:textColor="#1a1946"
+                android:textSize="15sp" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/ET_id_Confirm_Password_NA"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:hint="@string/Confirm_Password"
-            android:inputType="textPassword"
-            android:maxLines="1" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true">
 
-    </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/ET_id_Password_NA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:hint="@string/Password"
+                    android:inputType="textPassword"
+                    android:maxLines="1" />
 
-    <CheckedTextView
-        android:id="@+id/CTV_Recordar_Usuario_NA"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-        android:checked="true"
-        android:gravity="start"
-        android:shadowRadius="0"
-        android:text="@string/Sesion"
-        android:textColor="#1a1946"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+            </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/BTN_Iniciar_Sesion_NA"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="bottom|center"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bk_boton_plano"
-        android:gravity="center"
-        android:onClick="onClick"
-        android:stateListAnimator="@null"
-        android:text="@string/Login_BTN"
-        android:textAlignment="center"
-        android:textColor="#1a1946"
-        android:textSize="15sp" />
+            <TextView
+                android:id="@+id/TV_Confirm_Password_NA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="55dp"
+                android:text="@string/Confirm_Password"
+                android:textColor="#1a1946"
+                android:textSize="15sp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/ET_id_Confirm_Password_NA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:hint="@string/Confirm_Password"
+                    android:inputType="textPassword"
+                    android:maxLines="1" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <CheckedTextView
+                android:id="@+id/CTV_Recordar_Usuario_NA"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:checked="true"
+                android:gravity="start"
+                android:shadowRadius="0"
+                android:text="@string/Sesion"
+                android:textColor="#1a1946"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/BTN_Iniciar_Sesion_NA"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="bottom|center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bk_boton_plano"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:stateListAnimator="@null"
+                android:text="@string/Login_BTN"
+                android:textAlignment="center"
+                android:textColor="#1a1946"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
