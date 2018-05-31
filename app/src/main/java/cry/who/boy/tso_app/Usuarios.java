@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,9 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Usuarios extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    private CheckedTextView checkedTextView;
     private TextInputEditText txtPassword, txtPassConfirm;
-    private EditText user;
+    private EditText user,email;
     private Button btnLogin;
 
     @Override
@@ -43,13 +41,6 @@ public class Usuarios extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        checkedTextView = (CheckedTextView) findViewById(R.id.CTV_Recordar_Usuario_NA);
-        checkedTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkedTextView.toggle();
-            }
-        });
 
         btnLogin = (Button) findViewById(R.id.BTN_Iniciar_Sesion_NA);
         btnLogin.setOnClickListener(this);
@@ -58,14 +49,18 @@ public class Usuarios extends AppCompatActivity
         txtPassConfirm = (TextInputEditText) findViewById(R.id.ET_id_Confirm_Password_NA);
 
         user = (EditText) findViewById(R.id.ET_Usuario_NA);
+        email = (EditText) findViewById(R.id.ET_Email);
     }
 
     @Override
     public void onClick(View v) {
-        Login(user.getText().toString().trim(),txtPassword.getText().toString(),txtPassConfirm.getText().toString());
+        Register(user.getText().toString().trim(),
+            email.getText().toString().trim(),
+                txtPassword.getText().toString(),
+                    txtPassConfirm.getText().toString());
     }
 
-    public void Login(String User, String Password, String Conf_Pass){
+    public void Register(String User, String Email, String Password, String Conf_Pass){
         String a,b;
 
         if(TextUtils.isEmpty(a = txtPassword.getText().toString().trim()) ||
@@ -77,20 +72,9 @@ public class Usuarios extends AppCompatActivity
         }else if(a.equals(b) != true) {
             txtPassword.setError("Deben ser iguales");
             txtPassConfirm.setError("Deben ser iguales");
-            }else{
-            if(checkedTextView.isChecked()){
-                Toast.makeText(this,"Registro Exitoso",Toast.LENGTH_SHORT).show();
-                Toast.makeText(this,"Recordar Usuario",Toast.LENGTH_SHORT).show();
-                Toast.makeText(this,"User: "+User,Toast.LENGTH_SHORT).show();
-                Toast.makeText(this,"Password: "+Password,Toast.LENGTH_SHORT).show();
 
             }else{
-                Toast.makeText(this,"Registro Exitoso",Toast.LENGTH_SHORT).show();
-                Toast.makeText(this,"No Recordar Usuario",Toast.LENGTH_SHORT).show();
-                Toast.makeText(this,"User: "+User,Toast.LENGTH_SHORT).show();
-                Toast.makeText(this,"Password: "+Password,Toast.LENGTH_SHORT).show();
-
-            }
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(Email,Conf_Pass);
         }
     }
 

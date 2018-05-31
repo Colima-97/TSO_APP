@@ -31,10 +31,10 @@ import cry.who.boy.tso_app.Objetos.FirebaseReferences;
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-private CheckedTextView checkedTextView;
 private Button btnLogin, btnRegister;
 private TextInputEditText txtPassword;
 private GoogleApiClient googleApiClient;
+private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +52,6 @@ private GoogleApiClient googleApiClient;
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        checkedTextView = (CheckedTextView) findViewById(R.id.CTV_Recordar_Usuario);
-        checkedTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkedTextView.toggle();
-            }
-        });
 
         btnLogin = (Button) findViewById(R.id.BTN_Iniciar_Sesion);
         btnLogin.setOnClickListener(this);
@@ -66,22 +59,18 @@ private GoogleApiClient googleApiClient;
         btnRegister.setOnClickListener(this);
 
         txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password);
+        
 
     }
 
     public void onClick(View view){
         switch (view.getId()){
             case R.id.BTN_Iniciar_Sesion:
-                Login();
-                if(checkedTextView.isChecked()){
-                    Toast.makeText(this,"Recordar Usuario",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(this,"No Recordar Usuario",Toast.LENGTH_SHORT).show();
-                }
+                    Login();
                 break;
             case R.id.BTN_Registrar:
-                Intent intento = new Intent(MainActivity.this, Usuarios.class);
-                startActivity(intento);
+                    Intent intento = new Intent(MainActivity.this, Usuarios.class);
+                    startActivity(intento);
                 break;
         }
     }
@@ -90,6 +79,7 @@ private GoogleApiClient googleApiClient;
         if(TextUtils.isEmpty(txtPassword.getText().toString().trim())){
             txtPassword.setError("No puede estar vacía");
         }else {
+            //Quiero que con el usuario se regrese el email
             Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_SHORT).show();
         }
 

@@ -82,7 +82,7 @@
                 android:id="@+id/TV_Confirm_Password_NA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="50dp"
                 android:text="@string/Confirm_Password"
                 android:textColor="#1a1946"
                 android:textSize="15sp" />
@@ -102,20 +102,6 @@
                     android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
-
-            <CheckedTextView
-                android:id="@+id/CTV_Recordar_Usuario_NA"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                android:checked="true"
-                android:gravity="start"
-                android:shadowRadius="0"
-                android:text="@string/Sesion"
-                android:textColor="#1a1946"
-                android:textSize="15sp"
-                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/BTN_Iniciar_Sesion_NA"

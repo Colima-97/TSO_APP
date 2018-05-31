@@ -63,18 +63,6 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <CheckedTextView
-                android:id="@+id/CTV_Recordar_Usuario"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                android:checked="true"
-                android:text="@string/Sesion"
-                android:textColor="#1a1946"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
             <LinearLayout
                 android:id="@+id/LL_Layout2"
                 android:layout_width="match_parent"
