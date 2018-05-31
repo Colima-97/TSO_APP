@@ -34,7 +34,23 @@
             <EditText
                 android:id="@+id/ET_Usuario_NA"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="Nombre_Usuario"/>
+
+            <TextView
+                android:id="@+id/TV_Email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/Email"
+                android:textColor="#1a1946"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/ET_Email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Email"/>
 
             <TextView
                 android:id="@+id/TV_Password_NA"

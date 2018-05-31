@@ -27,5 +27,7 @@
     <!--Navigation View-->
     <string name="Users">Iniciar Sesión</string>
     <string name="title_activity_usuarios">Usuarios</string>
+    <string name="Hint_Users">Nombre de Usuario</string>
+    <string name="Email">Correo Electrónico</string>
 
 </resources>

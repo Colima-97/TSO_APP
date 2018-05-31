@@ -2,6 +2,7 @@ package cry.who.boy.tso_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,11 +19,12 @@ import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import cry.who.boy.tso_app.Objetos.FirebaseReferences;
 
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity
 private CheckedTextView checkedTextView;
 private Button btnLogin, btnRegister;
 private TextInputEditText txtPassword;
+private GoogleApiClient googleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ private TextInputEditText txtPassword;
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -63,6 +66,7 @@ private TextInputEditText txtPassword;
         btnRegister.setOnClickListener(this);
 
         txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password);
+
     }
 
     public void onClick(View view){
@@ -129,9 +133,9 @@ private TextInputEditText txtPassword;
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_user) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_group) {
             //lol
         } else if (id == R.id.nav_slideshow) {
 
@@ -147,4 +151,5 @@ private TextInputEditText txtPassword;
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
