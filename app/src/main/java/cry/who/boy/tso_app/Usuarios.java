@@ -1,6 +1,9 @@
 package cry.who.boy.tso_app;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.view.GravityCompat;
@@ -15,7 +18,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +36,8 @@ public class Usuarios extends AppCompatActivity
     private TextInputEditText txtPassword, txtPassConfirm;
     private EditText user,email;
     private Button btnLogin;
+    private FirebaseAuth mAuth;
+    private ProgressDialog mProgress;
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mensajeRef = ref.child("mensaje");
@@ -59,6 +68,10 @@ public class Usuarios extends AppCompatActivity
         user = (EditText) findViewById(R.id.ET_Usuario_NA);
         email = (EditText) findViewById(R.id.ET_Email);
 
+        mAuth = FirebaseAuth.getInstance();
+        mProgress = new ProgressDialog(this);
+
+
     }
 
     @Override
@@ -87,22 +100,36 @@ public class Usuarios extends AppCompatActivity
                     txtPassConfirm.getText().toString());
     }
 
-    public void Register(String User, String Email, String Password, String Conf_Pass){
-        String a,b;
+    public void Register(String User, final String Email, String Password, String Conf_Pass){
+        mProgress.setMessage("Registrando Usuario, un momento por favor");
 
-        if(TextUtils.isEmpty(a = txtPassword.getText().toString().trim()) ||
-                TextUtils.isEmpty(b = txtPassConfirm.getText().toString().trim()) ||
+
+        if(TextUtils.isEmpty(txtPassword.getText().toString().trim()) ||
+                TextUtils.isEmpty(txtPassConfirm.getText().toString().trim()) ||
                     TextUtils.isEmpty(user.getText().toString().trim())){
             txtPassword.setError("No pueden estar vacías");
             txtPassConfirm.setError("No pueden estar vacías");
             user.setError("No puede estar vacía");
             email.setError("No puede estar vacía");
-        }else if(a.equals(b) != true) {
-            txtPassword.setError("Deben ser iguales");
-            txtPassConfirm.setError("Deben ser iguales");
-            }else{
-                mensajeRef.setValue(Email);
-                //FirebaseAuth.getInstance().createUserWithEmailAndPassword(Email,Conf_Pass);
+        }else{
+            mProgress.show();
+            mAuth.createUserWithEmailAndPassword(Email,Password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        mProgress.dismiss();
+                        if(task.isSuccessful()){
+                            String user_id = mAuth.getCurrentUser().getUid();
+                            mensajeRef.setValue(Email);
+                            startActivity(new Intent(Usuarios.this,MainActivity.class));
+                            finish();
+                            Toast.makeText(Usuarios.this, user_id,Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(Usuarios.this,"No se pudo, lol",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                })
+            ;
         }
     }
 
