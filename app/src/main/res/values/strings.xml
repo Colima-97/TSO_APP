@@ -30,4 +30,7 @@
     <string name="Hint_Users">Nombre de Usuario</string>
     <string name="Email">Correo Electrónico</string>
 
+    <!--Mensajes de error-->
+    <string name="Null_Text">No puede estar vacía</string>
+
 </resources>

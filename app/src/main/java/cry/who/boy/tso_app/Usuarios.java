@@ -102,30 +102,33 @@ public class Usuarios extends AppCompatActivity
         mProgress.setMessage("Registrando Usuario, un momento por favor");
 
 
-        if(TextUtils.isEmpty(txtPassword.getText().toString().trim()) ||
-                    TextUtils.isEmpty(user.getText().toString().trim())){
-            txtPassword.setError("No pueden estar vacías");
+        if(TextUtils.isEmpty(Password) ||
+                    TextUtils.isEmpty(User) ||
+                        TextUtils.isEmpty(Email)){
+            txtPassword.setError("No puede estar vacía");
             user.setError("No puede estar vacía");
             email.setError("No puede estar vacía");
-        }else{
-            mProgress.show();
-            mAuth.createUserWithEmailAndPassword(Email,Password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        mProgress.dismiss();
-                        if(task.isSuccessful()){
-                            String user_id = mAuth.getCurrentUser().getUid();
-                            mensajeRef.setValue(Email);
-                            startActivity(new Intent(Usuarios.this,MainActivity.class));
-                            finish();
-                            Toast.makeText(Usuarios.this, user_id,Toast.LENGTH_LONG).show();
-                        }else{
-                            Toast.makeText(Usuarios.this,"Usuario no creado",Toast.LENGTH_LONG).show();
+        }else if(Password.length()<=6) {
+            txtPassword.setError("Debe ser mayor a 6 caracteres");
+            }else{
+
+                mProgress.show();
+                mAuth.createUserWithEmailAndPassword(Email,Password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            mProgress.dismiss();
+                            if(task.isSuccessful()){
+                                String user_id = mAuth.getCurrentUser().getUid();
+                                mensajeRef.setValue(Email);
+                                startActivity(new Intent(Usuarios.this,MainActivity.class));
+                                finish();
+                                Toast.makeText(Usuarios.this, user_id,Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(Usuarios.this,"Usuario no creado",Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                })
-            ;
+                    });
         }
     }
 
