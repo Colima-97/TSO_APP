@@ -78,31 +78,6 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <TextView
-                android:id="@+id/TV_Confirm_Password_NA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:text="@string/Confirm_Password"
-                android:textColor="#1a1946"
-                android:textSize="15sp" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/ET_id_Confirm_Password_NA"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="60dp"
-                    android:hint="@string/Confirm_Password"
-                    android:inputType="textPassword"
-                    android:maxLines="1" />
-
-            </android.support.design.widget.TextInputLayout>
-
             <Button
                 android:id="@+id/BTN_Iniciar_Sesion_NA"
                 android:layout_width="150dp"

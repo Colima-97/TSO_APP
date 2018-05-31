@@ -33,7 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Usuarios extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    private TextInputEditText txtPassword, txtPassConfirm;
+    private TextInputEditText txtPassword;
     private EditText user,email;
     private Button btnLogin;
     private FirebaseAuth mAuth;
@@ -62,8 +62,7 @@ public class Usuarios extends AppCompatActivity
         btnLogin = (Button) findViewById(R.id.BTN_Iniciar_Sesion_NA);
         btnLogin.setOnClickListener(this);
 
-        txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Confirm_Password_NA);
-        txtPassConfirm = (TextInputEditText) findViewById(R.id.ET_id_Confirm_Password_NA);
+        txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password_NA);
 
         user = (EditText) findViewById(R.id.ET_Usuario_NA);
         email = (EditText) findViewById(R.id.ET_Email);
@@ -96,19 +95,16 @@ public class Usuarios extends AppCompatActivity
     public void onClick(View v) {
         Register(user.getText().toString().trim(),
             email.getText().toString().trim(),
-                txtPassword.getText().toString(),
-                    txtPassConfirm.getText().toString());
+                txtPassword.getText().toString());
     }
 
-    public void Register(String User, final String Email, String Password, String Conf_Pass){
+    public void Register(String User, final String Email, String Password){
         mProgress.setMessage("Registrando Usuario, un momento por favor");
 
 
         if(TextUtils.isEmpty(txtPassword.getText().toString().trim()) ||
-                TextUtils.isEmpty(txtPassConfirm.getText().toString().trim()) ||
                     TextUtils.isEmpty(user.getText().toString().trim())){
             txtPassword.setError("No pueden estar vacías");
-            txtPassConfirm.setError("No pueden estar vacías");
             user.setError("No puede estar vacía");
             email.setError("No puede estar vacía");
         }else{
@@ -125,7 +121,7 @@ public class Usuarios extends AppCompatActivity
                             finish();
                             Toast.makeText(Usuarios.this, user_id,Toast.LENGTH_LONG).show();
                         }else{
-                            Toast.makeText(Usuarios.this,"No se pudo, lol",Toast.LENGTH_LONG).show();
+                            Toast.makeText(Usuarios.this,"Usuario no creado",Toast.LENGTH_LONG).show();
                         }
                     }
                 })
