@@ -30,6 +30,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Usuarios extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
@@ -38,9 +41,6 @@ public class Usuarios extends AppCompatActivity
     private Button btnLogin;
     private FirebaseAuth mAuth;
     private ProgressDialog mProgress;
-
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mensajeRef = ref.child("mensaje");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,25 +70,7 @@ public class Usuarios extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         mProgress = new ProgressDialog(this);
 
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        mensajeRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                Log.i("MENSAJE",value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        setTitle("Registrar");
     }
 
     @Override
@@ -98,7 +80,7 @@ public class Usuarios extends AppCompatActivity
                 txtPassword.getText().toString());
     }
 
-    public void Register(String User, final String Email, String Password){
+    public void Register(final String User, final String Email, String Password){
         mProgress.setMessage("Registrando Usuario, un momento por favor");
 
 
@@ -120,8 +102,11 @@ public class Usuarios extends AppCompatActivity
                             mProgress.dismiss();
                             if(task.isSuccessful()){
                                 String user_id = mAuth.getCurrentUser().getUid();
-                                mensajeRef.setValue(Email);
-                                startActivity(new Intent(Usuarios.this,MainActivity.class));
+                                DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+                                DatabaseReference currentUserDB = database.child(mAuth.getCurrentUser().getUid());
+                                currentUserDB.child("email").setValue(Email);
+                                currentUserDB.child("username").setValue(User);
+                                startActivity(new Intent(Usuarios.this,UserDatos.class));
                                 finish();
                                 Toast.makeText(Usuarios.this, user_id,Toast.LENGTH_LONG).show();
                             }else{
