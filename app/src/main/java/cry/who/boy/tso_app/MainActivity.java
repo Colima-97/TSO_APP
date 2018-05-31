@@ -59,7 +59,7 @@ private FirebaseAuth.AuthStateListener mAuthListener;
         btnRegister.setOnClickListener(this);
 
         txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password);
-        
+
 
     }
 

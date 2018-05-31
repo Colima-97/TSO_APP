@@ -1,31 +1,31 @@
 package cry.who.boy.tso_app.Objetos;
 
 public class Usuarios {
-    String Clave;
-    String Contrasenia;
+    String Email;
+    String Username;
 
-    public Usuarios(){
+    public Usuarios() {
 
     }
 
-    public Usuarios(String Clave, String Contrasenia){
-        this.Clave = Clave;
-        this.Contrasenia = Contrasenia;
+    public Usuarios(String Email, String Username) {
+        this.Email = Email;
+        this.Username = Username;
     }
 
-    public String getClave() {
-        return Clave;
+    public String getEmail() {
+        return Email;
     }
 
-    public void setClave(String clave) {
-        Clave = clave;
+    public void setEmail(String email) {
+        Email = email;
     }
 
-    public String getContrasenia() {
-        return Contrasenia;
+    public String getUsername() {
+        return Username;
     }
 
-    public void setContrasenia(String contrasenia) {
-        Contrasenia = contrasenia;
+    public void setUsername(String username) {
+        Username = username;
     }
 }

@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import cry.who.boy.tso_app.Objetos.Coche;
+import cry.who.boy.tso_app.Objetos.FirebaseReferences;
 
 public class Usuarios extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -24,6 +33,7 @@ public class Usuarios extends AppCompatActivity
     private TextInputEditText txtPassword, txtPassConfirm;
     private EditText user,email;
     private Button btnLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +60,21 @@ public class Usuarios extends AppCompatActivity
 
         user = (EditText) findViewById(R.id.ET_Usuario_NA);
         email = (EditText) findViewById(R.id.ET_Email);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference tutorialRef = database.getReference(FirebaseReferences.TUTORIAL_REFERENCE);
+        tutorialRef.child(FirebaseReferences.COCHE_REFERENCE).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Coche coche = dataSnapshot.getValue(Coche.class);
+                Log.i("COCHE",coche.getDueno());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -66,13 +91,13 @@ public class Usuarios extends AppCompatActivity
         if(TextUtils.isEmpty(a = txtPassword.getText().toString().trim()) ||
                 TextUtils.isEmpty(b = txtPassConfirm.getText().toString().trim()) ||
                     TextUtils.isEmpty(user.getText().toString().trim())){
-            txtPassword.setError("No pueden estar vacía");
+            txtPassword.setError("No pueden estar vacías");
             txtPassConfirm.setError("No pueden estar vacías");
             user.setError("No puede estar vacía");
+            email.setError("No puede estar vacía");
         }else if(a.equals(b) != true) {
             txtPassword.setError("Deben ser iguales");
             txtPassConfirm.setError("Deben ser iguales");
-
             }else{
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(Email,Conf_Pass);
         }
