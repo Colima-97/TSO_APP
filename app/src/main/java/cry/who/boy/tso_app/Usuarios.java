@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,9 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import cry.who.boy.tso_app.Objetos.Coche;
-import cry.who.boy.tso_app.Objetos.FirebaseReferences;
-
 public class Usuarios extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
@@ -34,6 +30,8 @@ public class Usuarios extends AppCompatActivity
     private EditText user,email;
     private Button btnLogin;
 
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference mensajeRef = ref.child("mensaje");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +59,17 @@ public class Usuarios extends AppCompatActivity
         user = (EditText) findViewById(R.id.ET_Usuario_NA);
         email = (EditText) findViewById(R.id.ET_Email);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference tutorialRef = database.getReference(FirebaseReferences.TUTORIAL_REFERENCE);
-        tutorialRef.child(FirebaseReferences.COCHE_REFERENCE).addValueEventListener(new ValueEventListener() {
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mensajeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Coche coche = dataSnapshot.getValue(Coche.class);
-                Log.i("COCHE",coche.getDueno());
+                String value = dataSnapshot.getValue(String.class);
+                Log.i("MENSAJE",value);
             }
 
             @Override
@@ -99,7 +101,8 @@ public class Usuarios extends AppCompatActivity
             txtPassword.setError("Deben ser iguales");
             txtPassConfirm.setError("Deben ser iguales");
             }else{
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(Email,Conf_Pass);
+                mensajeRef.setValue(Email);
+                //FirebaseAuth.getInstance().createUserWithEmailAndPassword(Email,Conf_Pass);
         }
     }
 
