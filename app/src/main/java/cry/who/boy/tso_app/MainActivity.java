@@ -85,6 +85,10 @@ private FirebaseAuth mAuth;
 
     }
 
+    public void Datos_Database(String Email, String Usuario){
+
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

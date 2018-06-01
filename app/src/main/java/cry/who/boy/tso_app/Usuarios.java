@@ -80,7 +80,7 @@ public class Usuarios extends AppCompatActivity
                 txtPassword.getText().toString());
     }
 
-    public void Register(final String User, final String Email, String Password){
+    public void Register(final String User, final String Email, final String Password){
         mProgress.setMessage("Registrando Usuario, un momento por favor");
 
 
@@ -106,6 +106,7 @@ public class Usuarios extends AppCompatActivity
                                 DatabaseReference currentUserDB = database.child(mAuth.getCurrentUser().getUid());
                                 currentUserDB.child("email").setValue(Email);
                                 currentUserDB.child("username").setValue(User);
+                                mAuth.signInWithEmailAndPassword(Email,Password);
                                 startActivity(new Intent(Usuarios.this,UserDatos.class));
                                 finish();
                                 Toast.makeText(Usuarios.this, user_id,Toast.LENGTH_LONG).show();

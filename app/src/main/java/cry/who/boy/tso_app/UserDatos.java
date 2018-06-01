@@ -1,6 +1,8 @@
 package cry.who.boy.tso_app;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -9,9 +11,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserDatos extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+
+    private TextView tv_user_view;
+    private Button btn_logout_view;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +47,41 @@ public class UserDatos extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        tv_user_view = (TextView) findViewById(R.id.TV_User_View);
+        btn_logout_view = (Button) findViewById(R.id.BTN_Logout_View);
+
+        btn_logout_view.setOnClickListener(this);
+
+        if(mAuth.getCurrentUser() != null){
+            DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+            database.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    tv_user_view.setText(dataSnapshot.child("username").getValue().toString());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else{
+            Toast.makeText(UserDatos.this,"No se ha iniciado sesión",Toast.LENGTH_LONG).show();
+        }
+
         setTitle("Usuario");
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(mAuth.getCurrentUser() != null){
+            mAuth.signOut();
+            Toast.makeText(UserDatos.this,"Se ha cerrado sesión",Toast.LENGTH_LONG).show();
+            Intent intento = new Intent(UserDatos.this,MainActivity.class);
+            startActivity(intento);
+        }
     }
 
     @Override
@@ -88,4 +140,5 @@ public class UserDatos extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
