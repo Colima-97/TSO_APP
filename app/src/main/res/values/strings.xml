@@ -34,5 +34,8 @@
     <string name="Null_Text">No puede estar vacía</string>
     <string name="title_activity_user_datos">UserDatos</string>
     <string name="Actual_Window">Ventana actual</string>
+    <string name="title_activity_group">GroupActivity</string>
+
+    <string name="Logout">Cerrar Sesión</string>
 
 </resources>
