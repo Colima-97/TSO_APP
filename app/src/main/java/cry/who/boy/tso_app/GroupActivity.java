@@ -34,6 +34,7 @@ public class GroupActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -51,9 +52,9 @@ public class GroupActivity extends AppCompatActivity
         refLuces = refHome.child("luces");
         refLuzSala = refLuces.child("luz_sala");
         refCocina = refLuces.child("luz_cocina");
-        refHabitacion = refLuces.child("luz_Habitacion");
+        refHabitacion = refLuces.child("luz_habitacion");
 
-        btn_led_sala = (ToggleButton)  findViewById(R.id.btn_led_cocina);
+        btn_led_sala = (ToggleButton)  findViewById(R.id.btn_led_sala);
         btn_led_sala.setTextOn("APAGAR");
         btn_led_sala.setTextOff("ENCENDER");
         btn_led_cocina = (ToggleButton)  findViewById(R.id.btn_led_cocina);

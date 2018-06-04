@@ -9,34 +9,59 @@
     tools:showIn="@layout/app_bar_user_datos">
 
     <TextView
-        android:id="@+id/TV_User_View"
-        android:layout_width="142dp"
+        android:id="@+id/TV_Usuario_Mostrar"
+        android:layout_width="wrap_content"
         android:layout_height="27dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="Usuario"
+        android:text="Usuairo Actual:"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/TV_Email_View"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.586" />
+
+    <TextView
+        android:id="@+id/TV_Email_View"
+        android:layout_width="142dp"
+        android:layout_height="27dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:text="Usuario"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/BTN_Logout_View"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/BTN_Logout_View"
         android:layout_width="100dp"
-        android:text="Logout"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
+        android:background="@drawable/bk_boton_plano"
         android:gravity="center"
         android:stateListAnimator="@null"
+        android:text="Logout"
         android:textAlignment="center"
-        android:background="@drawable/bk_boton_plano"
         android:textColor="#1a1946"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TV_User_View" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="300dp" />
 
 </android.support.constraint.ConstraintLayout>

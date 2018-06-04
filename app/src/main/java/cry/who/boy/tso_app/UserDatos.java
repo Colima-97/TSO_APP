@@ -29,9 +29,8 @@ public class UserDatos extends AppCompatActivity
 
     private TextView tv_email;
     private Button btn_logout_view;
-    FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener1;
-    private DatabaseReference mDatabase, currentUserDB;
+    private FirebaseAuth mAuth;
+
 
 
     @Override
@@ -50,34 +49,30 @@ public class UserDatos extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        tv_email = (TextView) findViewById(R.id.TV_Email);
+        mAuth = FirebaseAuth.getInstance();
+
+        tv_email = (TextView) findViewById(R.id.TV_Email_View);
         btn_logout_view = (Button) findViewById(R.id.BTN_Logout_View);
 
         btn_logout_view.setOnClickListener(this);
 
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener1 = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() != null){
-                    Toast.makeText(UserDatos.this,"Llegó 1",Toast.LENGTH_SHORT).show();
-                    mDatabase = FirebaseDatabase.getInstance().getReference().child("Usuarios");
-                    currentUserDB = mDatabase.child(mAuth.getCurrentUser().getUid());
-                    currentUserDB.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Toast.makeText(UserDatos.this,"Llegó 2",Toast.LENGTH_SHORT).show();
-                            tv_email.setText(dataSnapshot.child("email").getValue().toString());
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
+        if(mAuth.getCurrentUser() != null){
+            DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+            database.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    tv_email.setText(dataSnapshot.child("email").getValue().toString());
                 }
-            }
-        };
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else{
+            Toast.makeText(UserDatos.this,"No se ha iniciado sesión",Toast.LENGTH_LONG).show();
+        }
+
 
         setTitle("Usuario");
     }
