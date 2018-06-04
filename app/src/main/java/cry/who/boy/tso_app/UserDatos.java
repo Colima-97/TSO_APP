@@ -29,9 +29,10 @@ public class UserDatos extends AppCompatActivity
 
     private TextView tv_email;
     private Button btn_logout_view;
-    private FirebaseAuth mAuth;
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mensajeRef = ref.child("email");
+    FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener1;
+    private DatabaseReference mDatabase, currentUserDB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +50,34 @@ public class UserDatos extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mAuth = FirebaseAuth.getInstance();
-
         tv_email = (TextView) findViewById(R.id.TV_Email);
         btn_logout_view = (Button) findViewById(R.id.BTN_Logout_View);
 
         btn_logout_view.setOnClickListener(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener1 = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser() != null){
+                    Toast.makeText(UserDatos.this,"Llegó 1",Toast.LENGTH_SHORT).show();
+                    mDatabase = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+                    currentUserDB = mDatabase.child(mAuth.getCurrentUser().getUid());
+                    currentUserDB.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Toast.makeText(UserDatos.this,"Llegó 2",Toast.LENGTH_SHORT).show();
+                            tv_email.setText(dataSnapshot.child("email").getValue().toString());
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+        };
 
         setTitle("Usuario");
     }
@@ -62,19 +85,8 @@ public class UserDatos extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-        mensajeRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
 
-                tv_email.setText(value);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
     @Override

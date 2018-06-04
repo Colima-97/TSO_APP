@@ -162,7 +162,7 @@ public class Usuarios extends AppCompatActivity
                 Intent intento1 = new Intent(Usuarios.this,MainActivity.class);
                 startActivity(intento1);
             }else{
-                Intent intento2 = new Intent(Usuarios.this,GroupActivity.class);
+                Intent intento2 = new Intent(Usuarios.this,UserDatos.class);
                 startActivity(intento2);
             }
         } else if (id == R.id.nav_group) {

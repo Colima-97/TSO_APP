@@ -1,13 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".GroupActivity"
-    tools:showIn="@layout/app_bar_group">
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="5dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".GroupActivity">
 
-    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:gravity="center"
+        android:text="CONTROL DE LEDS" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_led_sala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Led Sala"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="50dp" />
+
+    <ToggleButton
+        android:id="@+id/btn_led_sala"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:stateListAnimator="@null"
+        android:textAlignment="center"
+        android:background="@drawable/bk_boton_plano"
+        android:textColor="#1a1946"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_led_cocina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Led Cocina"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="50dp" />
+
+    <ToggleButton
+        android:id="@+id/btn_led_cocina"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:stateListAnimator="@null"
+        android:textAlignment="center"
+        android:background="@drawable/bk_boton_plano"
+        android:textColor="#1a1946"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_led_habitacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Led Habitacion"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="50dp" />
+
+    <ToggleButton
+        android:id="@+id/btn_led_habitacion"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:stateListAnimator="@null"
+        android:textAlignment="center"
+        android:background="@drawable/bk_boton_plano"
+        android:textColor="#1a1946"
+        android:textSize="15sp"
+        />
+
+</LinearLayout>
