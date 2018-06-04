@@ -1,9 +1,7 @@
 package cry.who.boy.tso_app;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,9 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class GroupActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +25,6 @@ public class GroupActivity extends AppCompatActivity
         setContentView(R.layout.activity_group);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -67,7 +61,15 @@ public class GroupActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.Cerrar_Sesión_Group) {
+            if(mAuth.getCurrentUser() != null){
+                mAuth.signOut();
+                Toast.makeText(GroupActivity.this,"Se ha cerrado sesión",Toast.LENGTH_LONG).show();
+                Intent intento = new Intent(GroupActivity.this,MainActivity.class);
+                startActivity(intento);
+            }else{
+                Toast.makeText(GroupActivity.this,"Algo ha salido mal",Toast.LENGTH_LONG).show();
+            }
             return true;
         }
 
@@ -80,16 +82,16 @@ public class GroupActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
+        if (id == R.id.nav_user) {
+            if(mAuth.getCurrentUser() == null){//Si ya se cerró la sesión
+                Intent intento1 = new Intent(GroupActivity.this, MainActivity.class);
+                startActivity(intento1);
+            }else{
+                Intent intento2 = new Intent(GroupActivity.this,GroupActivity.class);
+                startActivity(intento2);
+            }
+        } else if (id == R.id.nav_group) {
+            Toast.makeText(GroupActivity.this, R.string.Actual_Window,Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_send) {
 
         }

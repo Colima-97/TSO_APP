@@ -158,16 +158,20 @@ public class Usuarios extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_user) {
-            Intent intento1 = new Intent(Usuarios.this,MainActivity.class);
-            startActivity(intento1);
+            if(mAuth.getCurrentUser() == null){//Si ya se cerró la sesión
+                Intent intento1 = new Intent(Usuarios.this,MainActivity.class);
+                startActivity(intento1);
+            }else{
+                Intent intento2 = new Intent(Usuarios.this,GroupActivity.class);
+                startActivity(intento2);
+            }
         } else if (id == R.id.nav_group) {
-            Toast.makeText(Usuarios.this, R.string.Actual_Window,Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
+            if(mAuth.getCurrentUser() == null){
+                Toast.makeText(Usuarios.this,"Debe iniciar sesión primero",Toast.LENGTH_LONG).show();
+            }else {
+                Intent intento3 = new Intent(Usuarios.this, GroupActivity.class);
+                startActivity(intento3);
+            }
         } else if (id == R.id.nav_send) {
 
         }

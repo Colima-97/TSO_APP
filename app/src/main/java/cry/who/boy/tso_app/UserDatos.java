@@ -68,7 +68,7 @@ public class UserDatos extends AppCompatActivity
                 }
             });
         }else{
-            Toast.makeText(UserDatos.this,"No se ha iniciado sesión",Toast.LENGTH_LONG).show();
+            Toast.makeText(UserDatos.this,"Ups, algo ha fallado",Toast.LENGTH_LONG).show();
         }
 
         setTitle("Usuario");
@@ -109,9 +109,6 @@ public class UserDatos extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -122,16 +119,22 @@ public class UserDatos extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
+        if (id == R.id.nav_user) {
+            if(mAuth.getCurrentUser() == null){//Si ya se cerró la sesión
+                Intent intento1 = new Intent(UserDatos.this,MainActivity.class);
+                startActivity(intento1);
+            }else{
+                Toast.makeText(UserDatos.this,R.string.Actual_Window,Toast.LENGTH_LONG).show();
+            }
+        } else if (id == R.id.nav_group) {
+            if(mAuth.getCurrentUser() == null){//Si ya se cerró la sesión
+                Toast.makeText(UserDatos.this,"Debe iniciar sesión primero",Toast.LENGTH_LONG).show();
+                Intent intento = new Intent(UserDatos.this,MainActivity.class);
+                startActivity(intento);
+            }else{
+                Intent intento3 = new Intent(UserDatos.this,GroupActivity.class);
+                startActivity(intento3);
+            }
         } else if (id == R.id.nav_send) {
 
         }

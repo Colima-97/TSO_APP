@@ -129,10 +129,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Toast.makeText(MainActivity.this,"Puchado",Toast.LENGTH_SHORT).show();
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -144,14 +140,19 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_user) {
-            Toast.makeText(MainActivity.this, R.string.Actual_Window,Toast.LENGTH_SHORT).show();
+            if(mAuth.getCurrentUser() == null){//Si no se ha iniciado sesión
+                Toast.makeText(MainActivity.this, R.string.Actual_Window,Toast.LENGTH_SHORT).show();
+            }else{
+                Intent intento2 = new Intent(MainActivity.this,UserDatos.class);
+                startActivity(intento2);
+            }
         } else if (id == R.id.nav_group) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
+            if(mAuth.getCurrentUser() == null){
+                Toast.makeText(MainActivity.this,"Debe iniciar sesión primero",Toast.LENGTH_LONG).show();
+            }else{
+                Intent intento1 = new Intent(MainActivity.this, GroupActivity.class);
+                startActivity(intento1);
+            }
 
         } else if (id == R.id.nav_send) {
 
