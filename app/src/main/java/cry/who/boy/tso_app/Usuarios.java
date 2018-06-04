@@ -135,7 +135,16 @@ public class Usuarios extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.Cerrar_Sesión_Usuarios) {
+            //Cerrar Sesión
+            if(mAuth.getCurrentUser() != null){
+                mAuth.signOut();
+                Toast.makeText(Usuarios.this,"Se ha cerrado sesión",Toast.LENGTH_LONG).show();
+                Intent intento = new Intent(Usuarios.this,MainActivity.class);
+                startActivity(intento);
+            }else{
+                Toast.makeText(Usuarios.this,"No se ha iniciado sesión",Toast.LENGTH_LONG).show();
+            }
             return true;
         }
 
@@ -149,9 +158,10 @@ public class Usuarios extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_user) {
-            // Handle the camera action
+            Intent intento1 = new Intent(Usuarios.this,MainActivity.class);
+            startActivity(intento1);
         } else if (id == R.id.nav_group) {
-
+            Toast.makeText(Usuarios.this, R.string.Actual_Window,Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

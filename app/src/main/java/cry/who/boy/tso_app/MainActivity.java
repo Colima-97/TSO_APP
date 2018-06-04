@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Toast.makeText(MainActivity.this,"Puchado",Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -143,9 +144,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_user) {
-            // Handle the camera action
+            Toast.makeText(MainActivity.this, R.string.Actual_Window,Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_group) {
-            //lol
+
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
