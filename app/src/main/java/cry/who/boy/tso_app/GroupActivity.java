@@ -34,6 +34,8 @@ public class GroupActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -87,7 +89,7 @@ public class GroupActivity extends AppCompatActivity
                 Intent intento1 = new Intent(GroupActivity.this, MainActivity.class);
                 startActivity(intento1);
             }else{
-                Intent intento2 = new Intent(GroupActivity.this,GroupActivity.class);
+                Intent intento2 = new Intent(GroupActivity.this,UserDatos.class);
                 startActivity(intento2);
             }
         } else if (id == R.id.nav_group) {

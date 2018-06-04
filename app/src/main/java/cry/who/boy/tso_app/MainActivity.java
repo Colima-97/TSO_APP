@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity
                         mProgress.dismiss();//Aquí se acaba el proceso
                         if(task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_SHORT).show();
+                            Intent intento = new Intent(MainActivity.this,UserDatos.class);
+                            startActivity(intento);
                         }else{
                             Toast.makeText(getApplicationContext(), "Usuario no creado", Toast.LENGTH_SHORT).show();
                         }

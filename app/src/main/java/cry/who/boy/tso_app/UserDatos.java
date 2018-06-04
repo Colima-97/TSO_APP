@@ -30,6 +30,8 @@ public class UserDatos extends AppCompatActivity
     private TextView tv_email;
     private Button btn_logout_view;
     private FirebaseAuth mAuth;
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference mensajeRef = ref.child("email");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,24 +56,25 @@ public class UserDatos extends AppCompatActivity
 
         btn_logout_view.setOnClickListener(this);
 
-        if(mAuth.getCurrentUser() != null){
-            DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
-            database.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    tv_email.setText(dataSnapshot.child("email").getValue().toString());
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }else{
-            Toast.makeText(UserDatos.this,"Ups, algo ha fallado",Toast.LENGTH_LONG).show();
-        }
-
         setTitle("Usuario");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mensajeRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+
+                tv_email.setText(value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

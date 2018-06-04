@@ -99,7 +99,7 @@ public class Usuarios extends AppCompatActivity
                                 DatabaseReference currentUserDB = database.child(mAuth.getCurrentUser().getUid());
                                 currentUserDB.child("email").setValue(Email);
                                 mAuth.signInWithEmailAndPassword(Email,Password);
-                                startActivity(new Intent(Usuarios.this,MainActivity.class));
+                                startActivity(new Intent(Usuarios.this,GroupActivity.class));
                                 finish();
                                 Toast.makeText(Usuarios.this, user_id,Toast.LENGTH_LONG).show();
                             }else{
