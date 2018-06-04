@@ -37,7 +37,7 @@ public class Usuarios extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private TextInputEditText txtPassword;
-    private EditText user,email;
+    private EditText email;
     private Button btnLogin;
     private FirebaseAuth mAuth;
     private ProgressDialog mProgress;
@@ -64,7 +64,6 @@ public class Usuarios extends AppCompatActivity
 
         txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password_NA);
 
-        user = (EditText) findViewById(R.id.ET_Usuario_NA);
         email = (EditText) findViewById(R.id.ET_Email);
 
         mAuth = FirebaseAuth.getInstance();
@@ -75,25 +74,19 @@ public class Usuarios extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        Register(user.getText().toString().trim(),
-            email.getText().toString().trim(),
+        Register(email.getText().toString().trim(),
                 txtPassword.getText().toString());
     }
 
-    public void Register(final String User, final String Email, final String Password){
+    public void Register(final String Email, final String Password){
         mProgress.setMessage("Registrando Usuario, un momento por favor");
-
-
         if(TextUtils.isEmpty(Password) ||
-                    TextUtils.isEmpty(User) ||
-                        TextUtils.isEmpty(Email)){
+                    TextUtils.isEmpty(Email)){
             txtPassword.setError("No puede estar vacía");
-            user.setError("No puede estar vacía");
             email.setError("No puede estar vacía");
         }else if(Password.length()<=6) {
             txtPassword.setError("Debe ser mayor a 6 caracteres");
             }else{
-
                 mProgress.show();
                 mAuth.createUserWithEmailAndPassword(Email,Password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -105,9 +98,8 @@ public class Usuarios extends AppCompatActivity
                                 DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
                                 DatabaseReference currentUserDB = database.child(mAuth.getCurrentUser().getUid());
                                 currentUserDB.child("email").setValue(Email);
-                                currentUserDB.child("username").setValue(User);
                                 mAuth.signInWithEmailAndPassword(Email,Password);
-                                startActivity(new Intent(Usuarios.this,UserDatos.class));
+                                startActivity(new Intent(Usuarios.this,MainActivity.class));
                                 finish();
                                 Toast.makeText(Usuarios.this, user_id,Toast.LENGTH_LONG).show();
                             }else{

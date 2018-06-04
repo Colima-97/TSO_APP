@@ -1,11 +1,11 @@
 package cry.who.boy.tso_app;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,26 +16,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.CheckedTextView;
+import android.widget.EditText;
 import android.widget.Toast;
-
-
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-import cry.who.boy.tso_app.Objetos.FirebaseReferences;
+
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-private Button btnLogin, btnRegister;
-private TextInputEditText txtPassword;
-private GoogleApiClient googleApiClient;
-private FirebaseAuth.AuthStateListener mAuthListener;
-private FirebaseAuth mAuth;
+    private EditText etEmail;
+    private Button btnLogin, btnRegister;
+    private TextInputEditText txtPassword;
+    private FirebaseAuth mAuth;
+    private ProgressDialog mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +58,16 @@ private FirebaseAuth mAuth;
         btnRegister.setOnClickListener(this);
 
         txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password);
+        etEmail = (EditText) findViewById(R.id.ET_Email_main);
 
+        mAuth = FirebaseAuth.getInstance();
+        mProgress = new ProgressDialog(this);
     }
 
     public void onClick(View view){
         switch (view.getId()){
             case R.id.BTN_Iniciar_Sesion:
-                    Login();
+                    Login(etEmail.getText().toString().trim(),txtPassword.getText().toString().trim());
                 break;
             case R.id.BTN_Registrar:
                     Intent intento = new Intent(MainActivity.this, Usuarios.class);
@@ -75,17 +76,31 @@ private FirebaseAuth mAuth;
         }
     }
 
-    public void Login(){
-        if(TextUtils.isEmpty(txtPassword.getText().toString().trim())){
+    public void Login(String Email, String Password){
+        mProgress.setMessage("Iniciando Sesión, un momento por favor");//Aquí está el mensaje, pero aún no se mestra
+
+        if(TextUtils.isEmpty(Password)
+                || TextUtils.isEmpty(Email)){
             txtPassword.setError("No puede estar vacía");
-        }else {
-            //Quiero que con el usuario se regrese el email
-            Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_SHORT).show();
+            etEmail.setError("No puede estar vacía");
+        }else if(Password.length()<=6) {
+            txtPassword.setError("Debe ser mayor a 6 caracteres");
+        }else{
+            mProgress.show();
+            mAuth.signInWithEmailAndPassword(Email,Password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        mProgress.dismiss();//Aquí se acaba el proceso
+                        if(task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Usuario no creado", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
         }
-
-    }
-
-    public void Datos_Database(String Email, String Usuario){
 
     }
 

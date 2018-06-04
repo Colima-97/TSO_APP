@@ -23,19 +23,19 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/TV_Users"
+                android:id="@+id/TV_Email_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/Select_User"
+                android:text="@string/Email"
                 android:textColor="#1a1946"
-                android:textSize="15sp" />
+                android:textSize="15sp"/>
 
-            <Spinner
-                android:id="@+id/SP_Users"
-                android:layout_width="304dp"
+            <EditText
+                android:id="@+id/ET_Email_main"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp" />
+                android:hint="@string/Email"/>
 
             <TextView
                 android:id="@+id/TV_Password"

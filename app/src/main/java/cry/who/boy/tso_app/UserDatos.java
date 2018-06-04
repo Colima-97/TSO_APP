@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 public class UserDatos extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    private TextView tv_user_view;
+    private TextView tv_email;
     private Button btn_logout_view;
     private FirebaseAuth mAuth;
 
@@ -49,7 +49,7 @@ public class UserDatos extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
 
-        tv_user_view = (TextView) findViewById(R.id.TV_User_View);
+        tv_email = (TextView) findViewById(R.id.TV_Email);
         btn_logout_view = (Button) findViewById(R.id.BTN_Logout_View);
 
         btn_logout_view.setOnClickListener(this);
@@ -59,7 +59,7 @@ public class UserDatos extends AppCompatActivity
             database.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    tv_user_view.setText(dataSnapshot.child("username").getValue().toString());
+                    tv_email.setText(dataSnapshot.child("email").getValue().toString());
                 }
 
                 @Override
