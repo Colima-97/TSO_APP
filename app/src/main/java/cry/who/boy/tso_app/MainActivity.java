@@ -64,6 +64,16 @@ public class MainActivity extends AppCompatActivity
         mProgress = new ProgressDialog(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(mAuth.getCurrentUser() != null) {//Si se ha iniciado sesión
+            Intent intento1 = new Intent(MainActivity.this,UserDatos.class);
+            startActivity(intento1);
+        }
+    }
+
     public void onClick(View view){
         switch (view.getId()){
             case R.id.BTN_Iniciar_Sesion:
@@ -145,15 +155,15 @@ public class MainActivity extends AppCompatActivity
             if(mAuth.getCurrentUser() == null){//Si no se ha iniciado sesión
                 Toast.makeText(MainActivity.this, R.string.Actual_Window,Toast.LENGTH_SHORT).show();
             }else{
-                Intent intento2 = new Intent(MainActivity.this,UserDatos.class);
-                startActivity(intento2);
+                Intent intento1 = new Intent(MainActivity.this,UserDatos.class);
+                startActivity(intento1);
             }
         } else if (id == R.id.nav_group) {
             if(mAuth.getCurrentUser() == null){
                 Toast.makeText(MainActivity.this,"Debe iniciar sesión primero",Toast.LENGTH_LONG).show();
             }else{
-                Intent intento1 = new Intent(MainActivity.this, GroupActivity.class);
-                startActivity(intento1);
+                Intent intento2 = new Intent(MainActivity.this, GroupActivity.class);
+                startActivity(intento2);
             }
 
         } else if (id == R.id.nav_send) {
