@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_main);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
 
         if(mAuth.getCurrentUser() != null) {//Si se ha iniciado sesión
-            Intent intento1 = new Intent(MainActivity.this,UserDatos.class);
+            Intent intento1 = new Intent(MainActivity.this,GroupActivity.class);
             startActivity(intento1);
         }
     }

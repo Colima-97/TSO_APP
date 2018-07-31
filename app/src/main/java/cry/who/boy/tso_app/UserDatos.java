@@ -27,11 +27,11 @@ import com.google.firebase.database.ValueEventListener;
 public class UserDatos extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    private TextView tv_email;
+    private TextView tv_email,mtv_email;
     private Button btn_logout_view;
     private FirebaseAuth mAuth;
-
-
+    private DatabaseReference databaseReference;
+    private NavigationView mNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,15 +46,30 @@ public class UserDatos extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_user_datos);
         navigationView.setNavigationItemSelectedListener(this);
 
         mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(mAuth.getCurrentUser().getUid());
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view_user_datos);
+        mtv_email = (TextView)mNavigationView.getHeaderView(0).findViewById(R.id.TV_Id_User_Datos);
 
         tv_email = (TextView) findViewById(R.id.TV_Email_View);
         btn_logout_view = (Button) findViewById(R.id.BTN_Logout_View);
 
         btn_logout_view.setOnClickListener(this);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mtv_email.setText(dataSnapshot.child("email").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         if(mAuth.getCurrentUser() != null){
             DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
