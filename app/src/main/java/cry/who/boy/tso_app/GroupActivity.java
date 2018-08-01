@@ -54,7 +54,7 @@ public class GroupActivity extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(mAuth.getCurrentUser().getUid());
         mNavigationView = (NavigationView) findViewById(R.id.nav_view_group);
-        mtv_email = (TextView)mNavigationView.getHeaderView(0).findViewById(R.id.TV_Id_Group);
+        mtv_email = (TextView)mNavigationView.getHeaderView(0).findViewById(R.id.TV_Id_Email_Group);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

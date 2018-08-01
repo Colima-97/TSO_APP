@@ -37,10 +37,11 @@ public class Usuarios extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private TextInputEditText txtPassword;
-    private EditText email;
+    private EditText name,email;
     private Button btnLogin;
     private FirebaseAuth mAuth;
     private ProgressDialog mProgress;
+    private String Error = "No puede estar vacía";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class Usuarios extends AppCompatActivity
 
         txtPassword = (TextInputEditText) findViewById(R.id.ET_id_Password_NA);
 
+        name = (EditText) findViewById(R.id.ET_Name);
         email = (EditText) findViewById(R.id.ET_Email);
 
         mAuth = FirebaseAuth.getInstance();
@@ -74,16 +76,21 @@ public class Usuarios extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        Register(email.getText().toString().trim(),
-                txtPassword.getText().toString());
+        Register(name.getText().toString().trim(),
+                    email.getText().toString().trim(),
+                        txtPassword.getText().toString());
     }
 
-    public void Register(final String Email, final String Password){
+    public void Register(final String Name, final String Email, final String Password){
+        //Mensaje de progreso
         mProgress.setMessage("Registrando Usuario, un momento por favor");
+        //Comienza a ver que los campos no estén vacíos
         if(TextUtils.isEmpty(Password) ||
-                    TextUtils.isEmpty(Email)){
-            txtPassword.setError("No puede estar vacía");
-            email.setError("No puede estar vacía");
+                    TextUtils.isEmpty(Email) ||
+                        TextUtils.isEmpty(Name)){
+            txtPassword.setError(Error);
+            email.setError(Error);
+            name.setError(Error);
         }else if(Password.length()<=6) {
             txtPassword.setError("Debe ser mayor a 6 caracteres");
             }else{
@@ -94,14 +101,14 @@ public class Usuarios extends AppCompatActivity
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             mProgress.dismiss();
                             if(task.isSuccessful()){
-                                String user_id = mAuth.getCurrentUser().getUid();
                                 DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Usuarios");
                                 DatabaseReference currentUserDB = database.child(mAuth.getCurrentUser().getUid());
-                                currentUserDB.child("email").setValue(Email);
-                                mAuth.signInWithEmailAndPassword(Email,Password);
-                                startActivity(new Intent(Usuarios.this,GroupActivity.class));
+                                currentUserDB.child("email").setValue(Email);       //Agregar a la base de datos el email
+                                currentUserDB.child("username").setValue(Name);     //Agregar a la base de datos en usuario
+                                mAuth.signInWithEmailAndPassword(Email,Password);   //Iniciar sesión con Email y Password
+                                startActivity(new Intent(Usuarios.this,GroupActivity.class));   //Cambiar de Activity
                                 finish();
-                                Toast.makeText(Usuarios.this, user_id,Toast.LENGTH_LONG).show();
+                                Toast.makeText(Usuarios.this, "Usuario creado " + Name,Toast.LENGTH_LONG).show();
                             }else{
                                 Toast.makeText(Usuarios.this,"Usuario no creado",Toast.LENGTH_LONG).show();
                             }

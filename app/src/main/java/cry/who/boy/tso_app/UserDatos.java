@@ -52,7 +52,7 @@ public class UserDatos extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(mAuth.getCurrentUser().getUid());
         mNavigationView = (NavigationView) findViewById(R.id.nav_view_user_datos);
-        mtv_email = (TextView)mNavigationView.getHeaderView(0).findViewById(R.id.TV_Id_User_Datos);
+        mtv_email = (TextView)mNavigationView.getHeaderView(0).findViewById(R.id.TV_Id_Email_User_Datos);
 
         tv_email = (TextView) findViewById(R.id.TV_Email_View);
         btn_logout_view = (Button) findViewById(R.id.BTN_Logout_View);

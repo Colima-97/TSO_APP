@@ -29,6 +29,7 @@
     <string name="title_activity_usuarios">Usuarios</string>
     <string name="Hint_Users">Nombre de Usuario</string>
     <string name="Email">Correo Electrónico</string>
+    <string name="Name">Nombre</string>
 
     <!--Mensajes de error-->
     <string name="Null_Text">No puede estar vacía</string>
