@@ -96,7 +96,6 @@ public class UserDatos extends AppCompatActivity
     protected void onStart() {
         super.onStart();
 
-
     }
 
     @Override

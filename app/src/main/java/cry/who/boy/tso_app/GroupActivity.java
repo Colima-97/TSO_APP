@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -24,7 +25,10 @@ import com.google.firebase.database.ValueEventListener;
 public class GroupActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private TextView mtv_email;
     private FirebaseAuth mAuth;
+    private DatabaseReference databaseReference;
+    private NavigationView mNavigationView;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference refHome = database.getReference("home");
     DatabaseReference refLuces, refCocina, refLuzSala, refHabitacion;
@@ -48,6 +52,21 @@ public class GroupActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(mAuth.getCurrentUser().getUid());
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view_group);
+        mtv_email = (TextView)mNavigationView.getHeaderView(0).findViewById(R.id.TV_Id_Group);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mtv_email.setText(dataSnapshot.child("email").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         refLuces = refHome.child("luces");
         refLuzSala = refLuces.child("luz_sala");

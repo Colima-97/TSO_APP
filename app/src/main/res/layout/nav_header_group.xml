@@ -22,6 +22,7 @@
         app:srcCompat="@drawable/smart_home_icon"/>
 
     <TextView
+        android:id="@+id/TV_Id_Group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
