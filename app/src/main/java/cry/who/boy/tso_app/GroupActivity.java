@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 public class GroupActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private TextView mtv_email;
+    private TextView mtv_email,mtv_name;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     private NavigationView mNavigationView;
@@ -55,11 +55,13 @@ public class GroupActivity extends AppCompatActivity
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(mAuth.getCurrentUser().getUid());
         mNavigationView = (NavigationView) findViewById(R.id.nav_view_group);
         mtv_email = (TextView)mNavigationView.getHeaderView(0).findViewById(R.id.TV_Id_Email_Group);
+        mtv_name = (TextView)mNavigationView.getHeaderView(0).findViewById(R.id.TV_Id_Nombre_Group);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mtv_email.setText(dataSnapshot.child("email").getValue().toString());
+                mtv_name.setText(dataSnapshot.child("username").getValue().toString());
             }
 
             @Override

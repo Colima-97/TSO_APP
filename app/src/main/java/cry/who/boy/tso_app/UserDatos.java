@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 public class UserDatos extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    private TextView tv_email,mtv_email;
+    private TextView tv_email,mtv_email,tv_name,mtv_name;
     private Button btn_logout_view;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
@@ -53,9 +53,12 @@ public class UserDatos extends AppCompatActivity
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(mAuth.getCurrentUser().getUid());
         mNavigationView = (NavigationView) findViewById(R.id.nav_view_user_datos);
         mtv_email = (TextView)mNavigationView.getHeaderView(0).findViewById(R.id.TV_Id_Email_User_Datos);
+        mtv_name = (TextView)mNavigationView.getHeaderView(0).findViewById(R.id.TV_Id_Nombre_User_Datos);
 
         tv_email = (TextView) findViewById(R.id.TV_Email_View);
+        tv_name = (TextView) findViewById(R.id.TV_Name_View);
         btn_logout_view = (Button) findViewById(R.id.BTN_Logout_View);
+
 
         btn_logout_view.setOnClickListener(this);
 
@@ -63,6 +66,7 @@ public class UserDatos extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mtv_email.setText(dataSnapshot.child("email").getValue().toString());
+                mtv_name.setText(dataSnapshot.child("username").getValue().toString());
             }
 
             @Override
@@ -77,6 +81,7 @@ public class UserDatos extends AppCompatActivity
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     tv_email.setText(dataSnapshot.child("email").getValue().toString());
+                    tv_name.setText(dataSnapshot.child("username").getValue().toString());
                 }
 
                 @Override
